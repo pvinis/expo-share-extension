@@ -3,7 +3,7 @@ import { ConfigPlugin, InfoPlist, withInfoPlist } from "expo/config-plugins";
 import fs from "fs";
 import path from "path";
 
-import { getShareExtensionName } from "./index";
+import { getInfoPlistFilePath, getShareExtensionName } from "./index";
 
 export const withShareExtensionInfoPlist: ConfigPlugin = (config) => {
   return withInfoPlist(config, (config) => {
@@ -14,7 +14,7 @@ export const withShareExtensionInfoPlist: ConfigPlugin = (config) => {
       targetName
     );
 
-    const filePath = path.join(targetPath, "Info.plist");
+    const filePath = getInfoPlistFilePath(config);
 
     const infoPlist: InfoPlist = {
       CFBundleName: "$(PRODUCT_NAME)",
